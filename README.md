@@ -1,2 +1,4 @@
 # AlphaShoe
-Machine learning algorithm for SD210 Challenge
+Machine learning algorithm for SD210 Challenge.
+
+AlphaShoe FTW
