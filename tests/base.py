@@ -1,9 +1,11 @@
+# coding: utf-8
 # from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score
 # from matplotlib import pyplot as plt
 import pandas as pd
 import numpy as np
+import pickle
 import time
 # import random
 # import sys
@@ -31,7 +33,7 @@ def funk_mask(orders, customers, products):
     #              on='VariantId')
 
     m = orders
-    m["MatchSeason"] = [order_match_season(o) for i, o in orders.iterrows()]
+    # m["MatchSeason"] = [order_match_season(o) for i, o in orders.iterrows()]
 
     # Remove columns from input array
     x1 = m.loc[:, [xx for xx in m.columns if xx not in columns_ext]]
@@ -61,6 +63,20 @@ def log(text, t_start=None):
         print(text + "\t(" + str(elapsed_time) + "s)")
 
 
+def csv_to_pickle():
+    for filename in ["customers", "products", "X_train",\
+                     "y_train", "X_test", "y_test"]:
+        with open(filename + '.pickle', 'wb') as handle:
+            pickle.dump(pd.read_csv("../data/" + filename + ".csv"),
+                        handle,
+                        protocol=pickle.HIGHEST_PROTOCOL)
+
+def pickle_load(filename):
+    with open(filename + '.pickle', 'rb') as handle:
+        return pickle.load(handle)
+
+
+
 def main():
     log("enter main")
 
@@ -87,18 +103,18 @@ def main():
     score_train = roc_auc_score(
         y_train.ReturnQuantityBin.iloc[:100001],
         yres[:, 1])
-    y_tosubmit = clf.predict_proba(x2.loc[:100000, x1.columns])
-    score_test = roc_auc_score(
-        y_test.ReturnQuantityBin.iloc[:100001],
-        y_tosubmit[:, 1])
+    # y_tosubmit = clf.predict_proba(x2.loc[:100000, x1.columns])
+    # score_test = roc_auc_score(
+    #     y_test.ReturnQuantityBin.iloc[:100001],
+    #     y_tosubmit[:, 1])
 
-    print("train score:", score_train)
-    print("test score: ", score_test)
+    print "train score:", score_train
+    print "test score: ", score_test
 
 
 def check_value_error(m):
-    print("Any NaN?\t", np.any(np.isnan(m)))
-    print("All finite?\t", np.all(np.isfinite(m)))
+    print "Any NaN?\t", np.any(np.isnan(m))
+    print "All finite?\t", np.all(np.isfinite(m))
 
 
 if __name__ == '__main__':
