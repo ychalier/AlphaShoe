@@ -3,10 +3,10 @@ Machine learning algorithm for SD210 Data Challenge.
 
 ## team
 
- - François ([@Fran-cois](https://github.com/Fran-cois))
- - Yohan ([@ychalier](https://github.com/ychalier))
  - Ali ([@AliHarouchi](https://github.com/AliHarouchi))
- - Reda ([@rslaoui](https://github.com/rslaoui)) 
+ - François ([@Fran-cois](https://github.com/Fran-cois))
+ - Reda ([@rslaoui](https://github.com/rslaoui))
+ - Yohan ([@ychalier](https://github.com/ychalier))
 
 ## usage
 
